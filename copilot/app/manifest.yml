@@ -1,9 +1,9 @@
-# The manifest for the "copilot-playground" service.
+# The manifest for the "app" service.
 # Read the full specification for the "Load Balanced Web Service" type at:
 #  https://aws.github.io/copilot-cli/docs/manifest/lb-web-service/
 
 # Your service name will be used in naming your resources like log groups, ECS services, etc.
-name: copilot-playground
+name: app
 # The "architecture" of the service you're running.
 type: Load Balanced Web Service
 
@@ -17,13 +17,12 @@ image:
 http:
   # Requests to this path will be forwarded to your service. 
   # To match all requests you can use the "/" path. 
-  path: '/'
+  path: 'app'
   # You can specify a custom health check path. The default is "/".
   # For additional configuration: https://aws.github.io/copilot-cli/docs/manifest/lb-web-service/#http-healthcheck
   # healthcheck: '/'
   # You can enable sticky sessions.
   # stickiness: true
-  targetContainer: 'proxy'
 
 # Number of CPU units for the task.
 cpu: 256
@@ -31,11 +30,6 @@ cpu: 256
 memory: 512
 # Number of tasks that should be running in your service.
 count: 1
-
-sidecars:
-  proxy:
-    port: 80
-    image: 593653836732.dkr.ecr.ap-northeast-1.amazonaws.com/copilot-playground/nginx:latest
 
 # Optional fields for more advanced use-cases.
 #
