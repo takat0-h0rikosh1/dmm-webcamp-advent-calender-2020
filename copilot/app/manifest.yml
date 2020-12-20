@@ -20,7 +20,8 @@ http:
   path: 'app'
   # You can specify a custom health check path. The default is "/".
   # For additional configuration: https://aws.github.io/copilot-cli/docs/manifest/lb-web-service/#http-healthcheck
-  # healthcheck: '/'
+  healthcheck: '/'
+  targetContainer: 'proxy'
   # You can enable sticky sessions.
   # stickiness: true
 
@@ -43,3 +44,8 @@ count: 1
 #environments:
 #  test:
 #    count: 2               # Number of tasks to run for the "test" environment.
+
+sidecars:
+  proxy:
+    port: 80
+    image: 593653836732.dkr.ecr.ap-northeast-1.amazonaws.com/welcome/proxy:latest
